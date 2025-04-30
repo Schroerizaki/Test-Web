@@ -41,10 +41,10 @@ export default function Portfolio() {
         <section className="flex flex-col items-center py-12 text-center md:py-20">
           <div className="mb-6 overflow-hidden rounded-full border-4 border-primary">
             <Image
-              src="public\test 1.jpg"
+              src="/test 1.jpg"
               alt="Profile"
-              width={150}
-              height={150}
+              width={10}
+              height={10}
               className="h-[150px] w-[150px] object-cover"
               priority
             />
