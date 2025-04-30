@@ -1,233 +1,230 @@
+"use client"
+
 import Image from "next/image"
 import { Github, Mail, Linkedin, ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
 
 export default function Portfolio() {
+  const sectionRef = useRef(null)
+  const { inView } = useInView({
+    triggerOnce: true,  // Hanya animasi sekali ketika elemen masuk viewport
+    threshold: 0.1,     // Ketika 10% dari elemen terlihat
+  })
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
       {/* Header */}
-      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="font-bold">Sup</div>
-          <nav className="hidden md:block">
-            <ul className="flex gap-6">
-              <li>
-                <a href="#about" className="transition-colors hover:text-primary">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#skills" className="transition-colors hover:text-primary">
-                  Skills
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="transition-colors hover:text-primary">
-                  Projects
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="transition-colors hover:text-primary">
-                  Contact
-                </a>
-              </li>
-            </ul>
+      <header className="sticky top-0 z-10 bg-black/50 backdrop-blur border-b border-white/10">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <div className="text-2xl font-bold tracking-wide text-cyan-400">Leonardo</div>
+          <nav className="hidden md:flex gap-6 text-sm">
+            {["About", "Skills", "Projects", "Contact"].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-cyan-400 transition">
+                {item}
+              </a>
+            ))}
           </nav>
         </div>
       </header>
 
-      <main className="container space-y-20 py-8">
+      <main className="container mx-auto px-4 py-16 space-y-32">
         {/* Hero Section */}
-        <section className="flex flex-col items-center py-12 text-center md:py-20">
-          <div className="mb-6 overflow-hidden rounded-full border-4 border-primary">
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center text-center"
+        >
+          <div className="mb-6 rounded-full border-4 border-cyan-400 shadow-cyan-400 shadow-md">
             <Image
               src="/test 1.jpg"
               alt="Profile"
-              width={10}
-              height={10}
-              className="h-[150px] w-[150px] object-cover"
+              width={150}
+              height={150}
+              className="rounded-full object-cover"
               priority
             />
           </div>
-          <h1 className="mb-4 text-4xl font-bold">Leonardo Ivan Ransford</h1>
-          <h2 className="mb-6 text-xl text-muted-foreground">Web Developer</h2>
-          <p className="mb-8 max-w-2xl text-muted-foreground">
-            I build beautiful, responsive websites and web applications using modern technologies.
+          <h1 className="text-5xl font-extrabold tracking-tight mb-2">Leonardo Ivan Ransford</h1>
+          <p className="text-cyan-400 mb-4 text-xl">Web Developer & Futurist</p>
+          <p className="max-w-xl text-gray-300 mb-6">
+            I craft futuristic, responsive websites using cutting-edge technologies to deliver immersive digital experiences.
           </p>
           <div className="flex gap-4">
-            <Button asChild>
+            <Button className="bg-cyan-500 hover:bg-cyan-600 transition" asChild>
               <a href="#contact">Contact Me</a>
             </Button>
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="border-cyan-500 text-cyan-400 hover:bg-cyan-500/10" asChild>
               <a href="#projects">View Projects</a>
             </Button>
           </div>
-        </section>
+        </motion.section>
 
         {/* About Section */}
-        <section id="about" className="scroll-mt-20">
-          <h2 className="mb-8 text-center text-3xl font-bold">About Me</h2>
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div>
-              <p className="mb-4">
-               halo kawan kawan
+        <section id="about" ref={sectionRef}>
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: inView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            className="text-3xl font-bold mb-6 text-center"
+          >
+            About Me
+          </motion.h2>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -100 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-4"
+            >
+              <p>
+                I'm passionate about building clean, fast, and futuristic user interfaces. From frontend frameworks to backend
+                integrations, I love turning ideas into reality.
               </p>
               <p>
-                When I'm not coding, you can find me hiking, reading, or experimenting with new technologies. I'm always
-                looking for new challenges and opportunities to grow as a developer.
+                Outside of coding, I enjoy sci-fi films, exploring tech trends, and engaging in digital art and design.
               </p>
-            </div>
+            </motion.div>
             <div className="flex justify-center">
               <Image
                 src="/placeholder.svg?height=300&width=400"
-                alt="About me"
+                alt="About Me"
                 width={400}
                 height={300}
-                className="rounded-lg object-cover"
+                className="rounded-xl shadow-lg border border-white/10"
               />
             </div>
           </div>
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="scroll-mt-20">
-          <h2 className="mb-8 text-center text-3xl font-bold">My Skills</h2>
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {["HTML & CSS", "JavaScript", "React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js", "Git"].map(
-              (skill) => (
-                <div
-                  key={skill}
-                  className="rounded-lg border bg-card p-6 text-center transition-colors hover:border-primary"
-                >
-                  <h3 className="font-medium">{skill}</h3>
-                </div>
-              ),
-            )}
+        <section id="skills">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: inView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            className="text-3xl font-bold mb-6 text-center"
+          >
+            Skills
+          </motion.h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            {[ 
+              "HTML & CSS", 
+              "JavaScript", 
+              "React", 
+              "Next.js", 
+              "Tailwind CSS", 
+              "TypeScript", 
+              "Node.js", 
+              "Git" 
+            ].map((skill) => (
+              <motion.div
+                key={skill}
+                className="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-cyan-400 transition"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {skill}
+              </motion.div>
+            ))}
           </div>
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="scroll-mt-20">
-          <h2 className="mb-8 text-center text-3xl font-bold">My Projects</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <section id="projects">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: inView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            className="text-3xl font-bold mb-6 text-center"
+          >
+            Projects
+          </motion.h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((project) => (
-              <div
+              <motion.div
                 key={project}
-                className="overflow-hidden rounded-lg border bg-card transition-colors hover:border-primary"
+                className="bg-white/5 rounded-xl border border-white/10 hover:border-cyan-400 transition"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                <div className="h-48 bg-muted">
-                  <Image
-                    src={`/placeholder.svg?height=200&width=400&text=Project ${project}`}
-                    alt={`Project ${project}`}
-                    width={400}
-                    height={200}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-bold">Project {project}</h3>
-                  <p className="mb-4 text-muted-foreground">
-                    A brief description of this amazing project and the technologies used to build it.
+                <Image
+                  src={`/placeholder.svg?height=200&width=400&text=Project+${project}`}
+                  alt={`Project ${project}`}
+                  width={400}
+                  height={200}
+                  className="rounded-t-xl object-cover"
+                />
+                <div className="p-4 space-y-2">
+                  <h3 className="text-xl font-semibold">Project {project}</h3>
+                  <p className="text-sm text-gray-400">
+                    Description of futuristic project {project} using modern web stack.
                   </p>
-                  <div className="flex gap-2">
-                    <Button size="sm" variant="outline" asChild>
-                      <a href="#" className="flex items-center gap-1">
-                        <Github className="h-4 w-4" />
+                  <div className="flex gap-2 pt-2">
+                    <Button size="sm" variant="outline" className="border-cyan-500 text-cyan-400" asChild>
+                      <a href="#">
+                        <Github className="w-4 h-4 mr-1" />
                         Code
                       </a>
                     </Button>
-                    <Button size="sm" asChild>
-                      <a href="#" className="flex items-center gap-1">
-                        <ExternalLink className="h-4 w-4" />
+                    <Button size="sm" className="bg-cyan-600 hover:bg-cyan-700" asChild>
+                      <a href="#">
+                        <ExternalLink className="w-4 h-4 mr-1" />
                         Demo
                       </a>
                     </Button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="scroll-mt-20">
-          <h2 className="mb-8 text-center text-3xl font-bold">Get In Touch</h2>
-          <div className="mx-auto max-w-md">
-            <div className="mb-8 flex flex-col gap-6">
-              <a
-                href="mailto:email@example.com"
-                className="flex items-center gap-3 transition-colors hover:text-primary"
-              >
-                <Mail className="h-5 w-5" />
-                email@example.com
+        <section id="contact">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: inView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            className="text-3xl font-bold mb-6 text-center"
+          >
+            Contact
+          </motion.h2>
+          <div className="max-w-md mx-auto space-y-6 text-gray-300">
+            <div className="space-y-4">
+              <a href="mailto:ivanfebriantolalo@gmail.com" className="flex items-center gap-2 hover:text-cyan-400 transition">
+                <Mail className="w-5 h-5" />
+                ivanfebriantolalo@gmail.com
+              </a>
+              <a href="https://github.com/Schroerizaki" className="flex items-center gap-2 hover:text-cyan-400 transition">
+                <Github className="w-5 h-5" />
+                github.com/Schroerizaki
               </a>
               <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 transition-colors hover:text-primary"
+                href="https://www.linkedin.com/in/ivan-febrianto-8530b1244/"
+                className="flex items-center gap-2 hover:text-cyan-400 transition"
               >
-                <Github className="h-5 w-5" />
-                github.com/johndoe
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 transition-colors hover:text-primary"
-              >
-                <Linkedin className="h-5 w-5" />
-                linkedin.com/in/johndoe
+                <Linkedin className="w-5 h-5" />
+                linkedin.com/in/ivan-febrianto-8530b1244
               </a>
             </div>
-            <form className="space-y-4">
-              <div className="grid gap-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="mb-1 block text-sm font-medium">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="mb-1 block text-sm font-medium">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="message" className="mb-1 block text-sm font-medium">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-                  ></textarea>
-                </div>
-              </div>
-              <Button type="submit" className="w-full">
-                Send Message
-              </Button>
+            <form className="space-y-4 pt-6">
+              <input type="text" placeholder="Name" className="w-full rounded bg-white/10 p-2 text-white placeholder-gray-400" />
+              <input type="email" placeholder="Email" className="w-full rounded bg-white/10 p-2 text-white placeholder-gray-400" />
+              <textarea placeholder="Message" rows={4} className="w-full rounded bg-white/10 p-2 text-white placeholder-gray-400" />
+              <Button className="w-full bg-cyan-500 hover:bg-cyan-600">Send Message</Button>
             </form>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 border-t py-8">
-        <div className="container text-center">
-          <p className="text-muted-foreground">© {new Date().getFullYear()} John Doe. All rights reserved.</p>
-        </div>
+      <footer className="border-t border-white/10 py-6 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} Leonardo Ivan Ransford. All rights reserved.
       </footer>
     </div>
   )
