@@ -70,9 +70,7 @@ export default function Portfolio() {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4">
-                Hello! I'm John, a passionate web developer with 3 years of experience building modern web applications.
-                I specialize in frontend development with React and Next.js, but I'm also comfortable working with
-                backend technologies.
+                Gua ivan lu diem gausa bacot
               </p>
               <p>
                 When I'm not coding, you can find me hiking, reading, or experimenting with new technologies. I'm always
