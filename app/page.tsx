@@ -41,7 +41,7 @@ export default function Portfolio() {
         <section className="flex flex-col items-center py-12 text-center md:py-20">
           <div className="mb-6 overflow-hidden rounded-full border-4 border-primary">
             <Image
-              src="D:\code\IMV\day3\public\test 1.jpg"
+              src="public\test 1.jpg"
               alt="Profile"
               width={150}
               height={150}
