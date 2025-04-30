@@ -8,7 +8,7 @@ export default function Portfolio() {
       {/* Header */}
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
-          <div className="font-bold">My Portfolio</div>
+          <div className="font-bold">Sup</div>
           <nav className="hidden md:block">
             <ul className="flex gap-6">
               <li>
