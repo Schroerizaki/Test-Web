@@ -41,7 +41,7 @@ export default function Portfolio() {
         <section className="flex flex-col items-center py-12 text-center md:py-20">
           <div className="mb-6 overflow-hidden rounded-full border-4 border-primary">
             <Image
-              src="/placeholder.svg?height=150&width=150"
+              src="D:\code\IMV\day3\public\test 1.jpg"
               alt="Profile"
               width={150}
               height={150}
@@ -70,7 +70,7 @@ export default function Portfolio() {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div>
               <p className="mb-4">
-                Gua ivan lu diem gausa bacot
+               halo kawan kawan
               </p>
               <p>
                 When I'm not coding, you can find me hiking, reading, or experimenting with new technologies. I'm always
